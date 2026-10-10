@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome - Meal Mate</title>
+    <style>
+        /* Modern Reset */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        /* Clean Page Layout */
+        body {
+            background-color: #f8fafc;
+            color: #1e293b;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        /* Premium Floating Card */
+        .card {
+            background-color: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 24px;
+            padding: 45px 36px;
+            width: 100%;
+            max-width: 420px;
+            text-align: center;
+            box-shadow: 0 20px 45px -10px rgba(0, 0, 0, 0.08), 0 0 1px 1px rgba(0, 0, 0, 0.02);
+        }
+
+        /* Modern Logo Badge */
+        .logo-icon {
+            width: 72px;
+            height: 72px;
+            background-color: #eef2ff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 34px;
+            margin: 0 auto 16px auto;
+            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.12);
+        }
+
+        h1 {
+            font-size: 26px;
+            font-weight: 800;
+            color: #0f172a;
+            letter-spacing: -0.5px;
+            margin-bottom: 4px;
+        }
+
+        p.tagline {
+            color: #64748b;
+            font-size: 14px;
+            font-style: italic;
+            margin-bottom: 30px;
+        }
+
+        /* Smooth Action Cards */
+        .section-box {
+            background-color: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 18px 20px;
+            margin-bottom: 18px;
+            text-align: left;
+            transition: all 0.2s ease;
+        }
+
+        .section-box:hover {
+            border-color: #cbd5e1;
+            background-color: #f1f5f9;
+            transform: translateY(-1px);
+        }
+
+        .label {
+            font-size: 13px;
+            font-weight: 600;
+            color: #475569;
+            margin-bottom: 10px;
+        }
+
+        /* Modern Buttons */
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            border-radius: 10px;
+            font-size: 14.5px;
+            font-weight: 600;
+            text-decoration: none;
+            text-align: center;
+            background-color: #4f46e5;
+            color: #ffffff;
+            box-shadow: 0 3px 10px rgba(79, 70, 229, 0.25);
+            transition: all 0.2s ease;
+        }
+
+        .btn:hover {
+            background-color: #4338ca;
+            box-shadow: 0 6px 16px rgba(79, 70, 229, 0.35);
+            transform: translateY(-1px);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="logo-icon">🍽️</div>
+        <h1>Meal Mate</h1>
+        <p class="tagline">Your Hunger Mate!</p>
+
+        <div class="section-box">
+            <div class="label">New user? Sign up here.</div>
+            <a href="open_signup" class="btn">Sign Up</a>
+        </div>
+
+        <div class="section-box">
+            <div class="label">Already have an account? Sign in here.</div>
+            <a href="open_signin" class="btn">Sign In</a>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Restaurant</title>
+    <style>
+        /* Modern CSS Reset & Layout */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8fafc;
+            color: #334155;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        /* Form Container Card */
+        form {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            width: 100%;
+            max-width: 450px;
+        }
+
+        /* Labels */
+        label {
+            display: block;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: #1e293b;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Input Fields */
+        input[type="text"],
+        input[type="number"] {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            color: #334155;
+            background-color: #f8fafc;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        input[type="text"]:focus,
+        input[type="number"]:focus {
+            outline: none;
+            border-color: #3b82f6;
+            background-color: #ffffff;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+        }
+
+        /* Submit Button */
+        button[type="submit"] {
+            display: block;
+            width: 100%;
+            background-color: #3b82f6;
+            color: white;
+            padding: 0.75rem 1rem;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            box-shadow: 0 2px 4px rgba(59, 130, 246, 0.2);
+            transition: background-color 0.2s ease, transform 0.1s ease;
+            margin-top: 0.5rem;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #2563eb;
+        }
+
+        button[type="submit"]:active {
+            transform: scale(0.98);
+        }
+
+        /* Cleanly handle spacing for the double break tags in your layout */
+        br {
+            display: block;
+            content: "";
+            margin-top: 0.75rem;
+        }
+    </style>
+</head>
+<body>
+    <form action="{% url 'add_restaurant' %}" method="post">
+        {% csrf_token %}
+        <label>Restaurant name </label>
+        <input type="text" name="name">
+        <br><br>
+        <label>Picture url </label>
+        <input type="text" name="picture">
+        <br><br>
+        <label>Cuisine </label>
+        <input type="text" name="cuisine">
+        <br><br>
+        <label>Rating</label>
+        <input type="number" name="rating" min="0" max="5" step="0.5">
+        <br><br>
+        <br><br>
+        <button type="submit">Add Restaurant</button>
+    </form>
+</body>
+</html>

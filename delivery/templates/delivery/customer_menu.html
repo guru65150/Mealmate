@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu - Meal Mate</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f8fafc;
+            color: #1e293b;
+            padding: 2rem 1rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        /* Purple Welcome Banner */
+        .welcome-banner {
+            background: linear-gradient(135deg, #4f46e5 0%, #6366f1 100%);
+            color: #ffffff;
+            padding: 1.8rem 2.2rem;
+            border-radius: 18px;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 25px rgba(79, 70, 229, 0.2);
+        }
+
+        .welcome-banner h2 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 0.4rem;
+        }
+
+        .welcome-banner p {
+            font-size: 0.95rem;
+            color: #e0e7ff;
+        }
+
+        /* Header Row (Menu Items + View Cart) */
+        .header-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .header-row h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #0f172a;
+        }
+
+        /* View Cart Button */
+        .btn-cart {
+            background-color: #4f46e5;
+            color: #ffffff;
+            text-decoration: none;
+            padding: 0.65rem 1.3rem;
+            border-radius: 12px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.25);
+            transition: all 0.2s ease;
+        }
+
+        .btn-cart:hover {
+            background-color: #4338ca;
+            transform: translateY(-1px);
+        }
+
+        /* Menu Items Container */
+        .items-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        /* Single Menu Item Card */
+        .menu-card {
+            background-color: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 1.2rem 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .menu-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+        }
+
+        .menu-left {
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+            flex: 1;
+        }
+
+        /* Picture */
+        .item-pic {
+            width: 75px;
+            height: 75px;
+            border-radius: 12px;
+            object-fit: cover;
+            background-color: #f1f5f9;
+            flex-shrink: 0;
+        }
+
+        /* Details */
+        .item-details {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .title-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .item-name {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #0f172a;
+        }
+
+        /* Veg / Non-Veg Badges */
+        .badge {
+            font-size: 0.68rem;
+            font-weight: 700;
+            padding: 2px 7px;
+            border-radius: 4px;
+            letter-spacing: 0.5px;
+        }
+
+        .badge-veg {
+            background-color: #dcfce7;
+            color: #15803d;
+            border: 1px solid #bbf7d0;
+        }
+
+        .badge-nonveg {
+            background-color: #fee2e2;
+            color: #b91c1c;
+            border: 1px solid #fecaca;
+        }
+
+        .item-desc {
+            font-size: 0.88rem;
+            color: #64748b;
+            line-height: 1.4;
+        }
+
+        .item-price {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: #0f172a;
+            margin-top: 4px;
+        }
+
+        /* Add to Cart Button */
+        .btn-add {
+            background-color: #eef2ff;
+            color: #4f46e5;
+            text-decoration: none;
+            padding: 0.65rem 1.2rem;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            white-space: nowrap;
+            transition: all 0.2s ease;
+        }
+
+        .btn-add:hover {
+            background-color: #4f46e5;
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Welcome Banner -->
+    <div class="welcome-banner">
+        <h2>Welcome {{ username }}! 👋</h2>
+        <p>Here’s the menu. Add your favorite dishes to the cart.</p>
+    </div>
+
+    <!-- Menu Header with Go to Cart Button -->
+    <div class="header-row">
+        <h3>Menu Items</h3>
+        <a href="{% url 'show_cart' username %}" class="btn-cart">
+            🛒 View Cart
+        </a>
+    </div>
+
+    <!-- Menu Items List -->
+    <div class="items-container">
+        {% for item in itemList %}
+            <div class="menu-card">
+                <div class="menu-left">
+                    <!-- Picture -->
+                    <img src="{{ item.picture }}" alt="{{ item.name }}" class="item-pic">
+
+                    <!-- Info -->
+                    <div class="item-details">
+                        <div class="title-row">
+                            <span class="item-name">{{ item.name }}</span>
+
+                            <!-- Veg / Non-Veg Badge -->
+                            {% if item.vegeterian %}
+                                <span class="badge badge-veg">VEG</span>
+                            {% else %}
+                                <span class="badge badge-nonveg">NON-VEG</span>
+                            {% endif %}
+                        </div>
+
+                        <p class="item-desc">{{ item.description }}</p>
+                        <p class="item-price">₹{{ item.price }}</p>
+                    </div>
+                </div>
+
+                <!-- Add to cart button -->
+                <a href="{% url 'add_to_cart' item.id username %}" class="btn-add">
+                    + Add to Cart
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+
+</body>
+</html>

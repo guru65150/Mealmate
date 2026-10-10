@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Page - Meal Mate</title>
+    <style>
+        /* Base Reset */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: #ffffff;
+            color: #111827;
+        }
+
+        /* Top Navigation Header */
+        header {
+            background-color: #ffffff;
+            padding: 1rem 3rem;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid #f3f4f6;
+        }
+
+        .logo {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: #4f46e5;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 1100px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+        }
+
+        /* Purple Welcome Banner */
+        .welcome-banner {
+            background: linear-gradient(135deg, #4f46e5 0%, #5b50f6 100%);
+            color: #ffffff;
+            padding: 2.2rem 2.5rem;
+            border-radius: 20px;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 10px 25px rgba(79, 70, 229, 0.2);
+        }
+
+        .welcome-banner h2 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .welcome-banner p {
+            font-size: 0.95rem;
+            color: #e0e7ff;
+            opacity: 0.9;
+        }
+
+        /* Section Heading */
+        .section-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #111827;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Restaurant Grid */
+        .restaurant-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 1.8rem;
+        }
+
+        /* Restaurant Card */
+        .restaurant-card {
+            background: #ffffff;
+            border-radius: 18px;
+            padding: 1rem;
+            border: 1px solid #f3f4f6;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .restaurant-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+        }
+
+        /* Image Box */
+        .card-image-container {
+            height: 180px;
+            width: 100%;
+            background-color: #fafafa;
+            border-radius: 14px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+
+        .card-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            padding: 10px;
+        }
+
+        /* Name & Rating Row */
+        .card-header-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.4rem;
+        }
+
+        .restaurant-name {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #111827;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        /* Rating Badge (Yellow pill) */
+        .restaurant-rating {
+            background-color: #fffbeb;
+            color: #d97706;
+            font-size: 0.8rem;
+            font-weight: 700;
+            padding: 0.2rem 0.6rem;
+            border-radius: 20px;
+            border: 1px solid #fef3c7;
+        }
+
+        /* Cuisine Tag (Grey pill) */
+        .restaurant-cuisine {
+            display: inline-block;
+            background-color: #f3f4f6;
+            color: #6b7280;
+            font-size: 0.78rem;
+            padding: 0.25rem 0.6rem;
+            border-radius: 6px;
+            margin-bottom: 1.2rem;
+            width: fit-content;
+        }
+
+        /* View Menu Button (Soft purple pill) */
+        .btn-view-menu {
+            display: block;
+            text-align: center;
+            background-color: #eef2ff;
+            color: #4f46e5;
+            text-decoration: none;
+            padding: 0.7rem;
+            border-radius: 12px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+
+        .btn-view-menu:hover {
+            background-color: #4f46e5;
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header>
+        <div class="logo">
+            🍽️ Meal Mate
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Welcome Banner -->
+        <div class="welcome-banner">
+            <h2>Welcome {{ username }}! 👋</h2>
+            <p>Explore top partner restaurants and order your favorites today.</p>
+        </div>
+
+        <!-- Section Title -->
+        <h3 class="section-title">Popular Restaurants</h3>
+
+        <!-- Restaurant Grid -->
+        <div class="restaurant-grid">
+            {% for r in restaurantList %}
+                <div class="restaurant-card">
+                    <div>
+                        <!-- Restaurant Picture -->
+                        <div class="card-image-container">
+                            <img src="{{ r.picture }}" alt="{{ r.name }}">
+                        </div>
+                        
+                        <!-- Restaurant Info -->
+                        <div class="card-header-row">
+                            <span class="restaurant-name" title="{{ r.name }}">{{ r.name }}</span>
+                            <span class="restaurant-rating">★ {{ r.rating }}</span>
+                        </div>
+                        <div class="restaurant-cuisine">{{ r.cuisine }}</div>
+                    </div>
+
+                    <!-- Action Button -->
+                    <a href="{% url 'view_menu' r.id username %}" class="btn-view-menu">
+                        View Menu
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    </main>
+
+</body>
+</html>

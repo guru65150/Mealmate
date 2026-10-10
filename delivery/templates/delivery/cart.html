@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Cart - Meal Mate</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f8fafc;
+            color: #1e293b;
+            padding: 2.5rem 1rem;
+            min-height: 100vh;
+        }
+
+        .cart-container {
+            max-width: 680px;
+            margin: 0 auto;
+        }
+
+        /* Back Link */
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: #64748b;
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            transition: color 0.2s ease;
+        }
+
+        .back-link:hover {
+            color: #1e293b;
+        }
+
+        /* Main Cart Card */
+        .cart-card {
+            background-color: #ffffff;
+            border-radius: 20px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            padding: 30px;
+        }
+
+        /* Card Header */
+        .cart-header {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .cart-header h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 4px;
+        }
+
+        .cart-header p {
+            font-size: 0.9rem;
+            color: #64748b;
+        }
+
+        .cart-header p strong {
+            color: #4f46e5;
+        }
+
+        /* Empty Cart Box (From your 1st image) */
+        .empty-cart-box {
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 40px 20px;
+            text-align: center;
+            color: #475569;
+            font-size: 1.05rem;
+            margin-top: 10px;
+            background-color: #ffffff;
+        }
+
+        /* Items List */
+        .items-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Single Item Row */
+        .cart-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #f8fafc;
+        }
+
+        .cart-item:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .item-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .item-img {
+            width: 70px;
+            height: 70px;
+            border-radius: 12px;
+            object-fit: cover;
+            background-color: #f1f5f9;
+            flex-shrink: 0;
+        }
+
+        .item-details h4 {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 4px;
+        }
+
+        .item-details p {
+            font-size: 0.85rem;
+            color: #64748b;
+            line-height: 1.4;
+        }
+
+        .item-price {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #0f172a;
+            white-space: nowrap;
+        }
+
+        /* Remove (✕) Button */
+        .btn-remove {
+            color: #ef4444;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 700;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background-color: #fee2e2;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+
+        .btn-remove:hover {
+            background-color: #ef4444;
+            color: #ffffff;
+            transform: scale(1.1);
+        }
+
+        /* Summary & Checkout Footer */
+        .cart-footer {
+            border-top: 2px dashed #e2e8f0;
+            padding-top: 1.5rem;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.95rem;
+            color: #64748b;
+            margin-bottom: 0.6rem;
+        }
+
+        .free-badge {
+            color: #16a34a;
+            font-weight: 700;
+        }
+
+        .total-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 1rem 0 1.5rem 0;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #0f172a;
+        }
+
+        .total-price {
+            font-size: 1.45rem;
+            font-weight: 800;
+            color: #4f46e5;
+        }
+
+        /* Checkout Button */
+        .btn-checkout {
+            display: block;
+            width: 100%;
+            background-color: #4f46e5;
+            color: #ffffff;
+            border: none;
+            border-radius: 12px;
+            padding: 14px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            text-align: center;
+            box-shadow: 0 4px 14px rgba(79, 70, 229, 0.3);
+            transition: all 0.2s ease;
+        }
+
+        .btn-checkout:hover {
+            background-color: #4338ca;
+            transform: translateY(-1px);
+            box-shadow: 0 6px 18px rgba(79, 70, 229, 0.4);
+        }
+
+        .btn-checkout:active {
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="cart-container">
+        <!-- Back Navigation -->
+        <a href="javascript:history.back()" class="back-link">&larr; Continue Browsing</a>
+
+        <!-- Cart Card -->
+        <div class="cart-card">
+            <div class="cart-header">
+                <h2>Your Cart</h2>
+                <p>Review items added by <strong>{{ username }}</strong></p>
+            </div>
+
+            {% if itemList %}
+                <!-- If items exist: show items and total -->
+                <div class="items-list">
+                    {% for item in itemList %}
+                        <div class="cart-item">
+                            <div class="item-info">
+                                <img src="{{ item.picture }}" alt="{{ item.name }}" class="item-img">
+                                <div class="item-details">
+                                    <h4>{{ item.name }}</h4>
+                                    <p>{{ item.description }}</p>
+                                </div>
+                            </div>
+
+                            <!-- Price and Remove Button -->
+                            <div style="display: flex; align-items: center; gap: 12px;">
+                                <div class="item-price">₹{{ item.price }}</div>
+                                <a href="{% url 'remove_from_cart' item.id username %}" class="btn-remove" title="Remove item">✕</a>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+
+                <!-- Total Breakdown & Checkout -->
+                <div class="cart-footer">
+                    <div class="summary-row">
+                        <span>Delivery Fee</span>
+                        <span class="free-badge">FREE</span>
+                    </div>
+
+                    <div class="total-row">
+                        <span>Total Amount</span>
+                        <span class="total-price">₹{{ total_price }}</span>
+                    </div>
+
+                    <form action="{% url 'checkout' username %}">
+                        <button type="submit" class="btn-checkout">Proceed to Checkout &rarr;</button>
+                    </form>
+                </div>
+            {% else %}
+                <!-- If cart is empty: show exact box from your 1st image -->
+                <div class="empty-cart-box">
+                    Your cart is empty. Add items from the menu to get started!
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+</body>
+</html>

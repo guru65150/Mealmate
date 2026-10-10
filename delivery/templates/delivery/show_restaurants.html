@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* Modern CSS Reset & Layout */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8fafc;
+            color: #334155;
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Table Styling (overriding border="1" attribute cleanly) */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            border: none !important;
+        }
+
+        /* Table Header */
+        thead {
+            background-color: #f1f5f9;
+        }
+
+        th {
+            color: #475569;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 0.05em;
+            padding: 1rem;
+            text-align: left;
+            border: none;
+        }
+
+        /* Table Cells */
+        td {
+            padding: 1rem;
+            vertical-align: middle;
+            border-bottom: 1px solid #e2e8f0;
+            color: #334155;
+            font-size: 0.95rem;
+            border-top: none;
+            border-left: none;
+            border-right: none;
+        }
+
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        tbody tr:hover {
+            background-color: #f8fafc;
+        }
+
+        /* Restaurant Picture inside table */
+        td img {
+            width: 70px;
+            height: 70px;
+            object-fit: cover;
+            border-radius: 6px;
+            background-color: #e2e8f0;
+        }
+
+        /* Action Links inside Operations column */
+        td a {
+            display: inline-block;
+            padding: 0.4rem 0.8rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.8rem;
+            transition: background-color 0.2s ease, opacity 0.2s ease;
+            margin-bottom: 0.3rem;
+            color: white;
+            text-align: center;
+        }
+
+        /* Update Restaurant Info Link Style (Blue) */
+        td a[href*="open_update_restaurant"] {
+            background-color: #3b82f6;
+        }
+        td a[href*="open_update_restaurant"]:hover {
+            background-color: #2563eb;
+        }
+
+        /* Delete Restaurant Link Style (Red) */
+        td a[href*="delete_restaurant"] {
+            background-color: #ef4444;
+        }
+        td a[href*="delete_restaurant"]:hover {
+            background-color: #dc2626;
+        }
+
+        /* Update Menu Link Style (Green/Teal) */
+        td a[href*="open_update_menu"] {
+            background-color: #10b981;
+        }
+        td a[href*="open_update_menu"]:hover {
+            background-color: #059669;
+        }
+
+        /* Hide the break tags to keep actions cleanly separated by margin/padding */
+        td br {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Restaurant name</th>
+                <th>Picture</th>
+                <th>Cuisine</th>
+                <th>Rating</th>
+                <th>Operations</th>
+            </tr>
+        </thead>
+        <tbody>
+            {%  for r in restaurantList %}
+                <tr>
+                    <td>{{ r.name }}</td>
+                    <td>
+                        <img src="{{ r.picture }}">
+                    </td>
+                    <td>{{ r.cuisine }}</td>
+                    <td>{{ r.rating }}</td>
+                    <td>
+                        <a href="{% url 'open_update_restaurant' r.id %}">
+                            Update Restaurant Info
+                        </a>
+                        <br>
+                        <a href="{% url 'delete_restaurant' r.id %}">
+                            Delete Restaurant
+                        </a>
+                        <br>
+                        <a href="{% url 'open_update_menu' r.id %}">
+                            Update Menu
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+</body>
+</html>
